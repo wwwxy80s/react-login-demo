@@ -1,21 +1,18 @@
 import React from 'react';
-import {Route, Switch, BrowserRouter} from 'react-router-dom';
+import {Switch} from 'react-router-dom';
 import {Provider} from 'react-redux';
-import createBrowserHistory from 'history/createBrowserHistory';
+import {Route} from 'react-router';
 import {ConnectedRouter} from 'react-router-redux';
+import store, {history} from "./Store";
 
-
-import store from './Store';
 import Login from './containers/login';
-import Home from './containers/test';
-
-export const history = createBrowserHistory();
+import Home from './containers/home';
 
 const Routes = () => (
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <Switch>
-                <Route path="/" component={Login}/>
+                <Route exact path="/" component={Login}/>
                 <Route path="/home" component={Home}/>
             </Switch>
         </ConnectedRouter>

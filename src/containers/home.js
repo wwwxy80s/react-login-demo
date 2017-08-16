@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Row, Col, Card, Table} from 'antd';
 import {connect} from 'react-redux';
 
-import {getTask} from "../actions/home";
+import {getCrawlerTask, getTask} from "../actions/home";
 
 const {Column} = Table;
 // const columns = [{
@@ -61,13 +61,9 @@ class Home extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        console.log('home mount')
-    }
-
     componentWillMount() {
-        console.log('componentWillMount start!');
         this.props.getTask();
+        this.props.getCrawlerTask(1, 5);
     }
 
     render() {
@@ -75,36 +71,44 @@ class Home extends Component {
             <div style={{padding: '30px'}}>
                 <Row gutter={16}>
                     <Col span={6}>
-                        <Card title="任务总数" bordered={true}>{this.props.allCount}</Card>
+                        <Card title="任务总数" bordered={true}>{this.props.taskData.allCount}</Card>
                     </Col>
                     <Col span={6}>
-                        <Card title="已启用任务" bordered={true}>{this.props.enabledCount}</Card>
+                        <Card title="已启用任务" bordered={true}>{this.props.taskData.enabledCount}</Card>
                     </Col>
                     <Col span={6}>
-                        <Card title="执行中任务" bordered={true}>{this.props.executeCount}</Card>
+                        <Card title="执行中任务" bordered={true}>{this.props.taskData.executeCount}</Card>
                     </Col>
                     <Col span={6}>
-                        <Card title="休息任务" bordered={true}>{this.props.sleepCount}</Card>
+                        <Card title="休息任务" bordered={true}>{this.props.taskData.sleepCount}</Card>
                     </Col>
                 </Row>
                 <Row type="flex" gutter={16}>
                     <Col>
-                        <Table dataSource={data1} title={title1}
-                               pagination={{total: 50, showSizeChanger: true, showQuickJumper: true}}>
+                        <Table dataSource={this.props.crawlerTaskData.pageContent} title={title1}
+                               pagination={{
+                                   current: this.props.crawlerTaskData.currentPage,
+                                   total: this.props.crawlerTaskData.totalCount,
+                                   pageSize: this.props.crawlerTaskData.pageSize,
+                                   onChange: this.props.getCrawlerTask,
+                                   showSizeChanger: true,
+                                   showQuickJumper: true,
+                               }}>
                             <Column
                                 title="排名"
-                                dataIndex="order1"
-                                key="order1"
+                                dataIndex="index"
+                                key="index"
+                                render={(text, record, index) => (index + 1)}
                             />
                             <Column
                                 title="任务名称"
-                                dataIndex="name1"
-                                key="name1"
+                                dataIndex="name"
+                                key="name"
                             />
                             <Column
                                 title="采集量"
-                                dataIndex="count1"
-                                key="count1"
+                                dataIndex="count"
+                                key="count"
                             />
                         </Table>
                     </Col>
@@ -142,25 +146,26 @@ class Home extends Component {
 
 Home.propTypes = {
     getTask: PropTypes.func.isRequired,
+    getCrawlerTask: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
-    // console.log(state);
-    const taskData = state.taskData;
-    console.log(taskData);
+    const taskData = state.getHome.taskData;
+    const crawlerTaskData = state.getHome.crawlerTaskData;
 
     return {
-        allCount: taskData.allCount,
-        enabledCount: taskData.enabledCount,
-        executeCount: taskData.executeCount,
-        sleepCount: taskData.sleepCount,
-    }
+        taskData: {...taskData},
+        crawlerTaskData: {...crawlerTaskData}
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         getTask: () => {
             dispatch(getTask());
+        },
+        getCrawlerTask: (page, pageSize) => {
+            dispatch(getCrawlerTask(page, pageSize));
         }
     };
 };

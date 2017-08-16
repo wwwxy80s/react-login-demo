@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-// import {withRouter} from 'react-router';
-// import {push} from 'react-router-redux';
-//
-//
-import store from '../Store';
-import DevTools from '../utils/Devtools';
+
 import {loginAction} from "../actions/login"
 
 class Login extends Component {
@@ -24,15 +19,6 @@ class Login extends Component {
             }
         };
     }
-
-
-    // componentWillMount(){
-    //     if (localStorage.getItem('token')) {
-    //         console.log('enter if');
-    //         console.log(this.props);
-    //         this.props.history.push('/home');
-    //     }
-    // }
 
 
     onSubmit(ev) {
@@ -98,7 +84,6 @@ class Login extends Component {
                         </button>
                     </form>
                 </div>
-                <DevTools/>
             </div>
         );
     }

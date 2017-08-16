@@ -2,10 +2,10 @@ import {LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE, LOGIN_USER} from '../actions/log
 
 
 const initialState = {
-    userData: {
-        username: '',
-        password: '',
-    }
+    // userData: {
+    //     username: '',
+    //     password: '',
+    // }
 };
 
 export const login = (state = initialState, action = {}) => {

@@ -1,27 +1,28 @@
 import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import {login} from './reducers/login';
-import {getTask} from './reducers/home';
+import createHistory from 'history/createBrowserHistory';
 import {routerReducer, routerMiddleware} from 'react-router-redux';
 
-import {history} from "./Routes";
 import rootSaga from './sagas/sagas';
-import DevTools from './utils/Devtools';
+import {login} from './reducers/login';
+import {getHome} from './reducers/home';
+
+export const history = createHistory();
 
 const middleware = routerMiddleware(history);
+
 const sagaMiddleware = createSagaMiddleware();
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     login,
-    getTask,
+    getHome,
     router: routerReducer
 });
 
-const enhancer = compose(
-    // Middleware you want to use in development:
+const enhancer = composeEnhancers(
     applyMiddleware(sagaMiddleware, middleware),
-    // Required! Enable Redux DevTools with the monitors you chose
-    DevTools.instrument()
 );
 
 const store = createStore(
@@ -29,7 +30,6 @@ const store = createStore(
     enhancer
 );
 
-// console.log(store);
 sagaMiddleware.run(rootSaga);
 
 export default store;

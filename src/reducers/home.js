@@ -1,22 +1,30 @@
-import {GET_TASK, GET_TASK_SUCCESS, GET_CRAWLER, GET_RULE} from "../actions/home";
+import {GET_TASK, GET_TASK_SUCCESS, GET_CRAWLER_TASK,GET_CRAWLER_TASK_SUCCESS, GET_RULE} from "../actions/home";
 
 const initialState = {
     taskData: {
-        allCount: 0,
-        enabledCount: 0,
-        executeCount: 0,
-        sleepCount: 0,
+        // allCount: 0,
+        // enabledCount: 0,
+        // executeCount: 0,
+        // sleepCount: 0,
     }
+    // taskData:null
 };
 
-export const getTask = (state = initialState, action = {}) => {
+export const getHome = (state = initialState, action = {}) => {
     switch (action.type) {
         case GET_TASK:
             return state;
         case GET_TASK_SUCCESS:
             return ({
                     ...state,
-                    ...action.taskData,
+                    taskData:{...action.taskData},
+                }
+            );
+
+        case GET_CRAWLER_TASK_SUCCESS:
+            return ({
+                    ...state,
+                    crawlerTaskData:{...action.crawlerTaskData},
                 }
             );
         default:
