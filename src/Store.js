@@ -5,7 +5,7 @@ import {routerReducer, routerMiddleware} from 'react-router-redux';
 
 import rootSaga from './sagas/sagas';
 import {login} from './reducers/login';
-import {getHome} from './reducers/home';
+import {home} from './reducers/home';
 
 export const history = createHistory();
 
@@ -17,7 +17,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     login,
-    getHome,
+    home,
     router: routerReducer
 });
 

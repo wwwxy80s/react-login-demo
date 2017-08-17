@@ -5,7 +5,6 @@ import md5 from 'md5';
 import {getUserData} from "./selectors";
 import {getSalt, login} from "./api";
 import {loginFailureAction, loginSuccessAction} from "../actions/login";
-import {getTask,getCrawlerTask} from "../actions/home";
 
 export function* loginUserAsync() {
     const user = yield select(getUserData);
@@ -18,8 +17,6 @@ export function* loginUserAsync() {
         const data = yield call(login.bind(this, user));
         if (data.status === 200) {
             yield put(loginSuccessAction(data));
-            // yield put(getTask());
-            // yield put(getCrawlerTask(1, 5));
             yield put(push('/home'));
         } else {
             yield put(loginFailureAction(data));

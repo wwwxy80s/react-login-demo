@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 import {loginAction} from "../actions/login"
 
@@ -20,7 +21,6 @@ class Login extends Component {
         };
     }
 
-
     onSubmit(ev) {
         ev.preventDefault();
         const username = this.state.user.username;
@@ -28,7 +28,7 @@ class Login extends Component {
         if (!username.trim() || !password.trim()) {
             return;
         }
-        this.props.onLogin(this.state.user);
+        this.props.loginAction(this.state.user);
     }
 
     onUsernameChange(event) {
@@ -54,11 +54,6 @@ class Login extends Component {
     }
 
     render() {
-        // if (localStorage.getItem('token')) {
-        //     console.log('enter if');
-        //     this.props.history.push('/home');
-        //     // store.dispatch(push('/home'));
-        // }
         return (
             <div>
                 <div className="login">
@@ -90,24 +85,11 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-    onLogin: PropTypes.func.isRequired,
+    loginAction: PropTypes.func.isRequired,
 };
 
-// const mapStateToProps = (state) => {
-//     return {
-//         loginSuccess: state.loginSuccess
-//     };
-// };
-
 const mapDispatchToProps = (dispatch) => {
-    return {
-        onLogin: (user) => {
-            // console.log(user);
-            dispatch(loginAction(user));
-        }
-    }
+    return bindActionCreators({loginAction}, dispatch);
 };
 
 export default connect(null, mapDispatchToProps)(Login);
-// export default connect(mapStateToProps, mapDispatchToProps)(Login);
-

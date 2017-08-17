@@ -2,10 +2,6 @@ import {LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE, LOGIN_USER} from '../actions/log
 
 
 const initialState = {
-    // userData: {
-    //     username: '',
-    //     password: '',
-    // }
 };
 
 export const login = (state = initialState, action = {}) => {
@@ -24,7 +20,7 @@ export const login = (state = initialState, action = {}) => {
                 ...state,
                 tokenData: {...action.data.data},
             });
-            // return Object.assign({}, {...state}, {tokenData: {...action.data.data}});
+        // return Object.assign({}, {...state}, {tokenData: {...action.data.data}});
         case LOGIN_USER_FAILURE:
             return ({
                 ...state,
