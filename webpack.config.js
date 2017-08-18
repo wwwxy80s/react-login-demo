@@ -20,7 +20,6 @@ module.exports = {
                         plugins: ["transform-runtime", ["import", [{libraryName: "antd", style: "css"}]]],
                     }
                 },
-
             },
             {
                 test: /\.css$/,

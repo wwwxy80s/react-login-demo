@@ -1,25 +1,28 @@
 import {put, call} from 'redux-saga/effects';
-import {getTask, getCrawlerTask} from "./api";
-import {getTaskSuccess, getCrawlerTaskSuccess} from "../actions/home";
+import {getTask, getCrawler} from "./api";
+import {getTaskSuccess, getCrawlerSuccess} from "../actions/home";
 
-export function* getTaskAsync() {
+export function* getTaskAsync(action) {
+    // console.log(action);
+    const {apiType} = action;
+    // console.log(apiType);
     //原始数据
-    const task = yield call(getTask);
-    // console.log(task);
-    if (task.status === 200) {
+    const taskData = yield call(getTask, apiType);
+    console.log(taskData);
+    if (taskData.status === 200) {
         //具体需要用的数据
-        yield put(getTaskSuccess(task.data));
+        yield put(getTaskSuccess(taskData.data, apiType));
     }
 }
 
-export function* getCrawlerTaskAsync(action) {
+export function* getCrawlerAsync(action) {
     // console.log(action);
-    const {pageData: {page, pageSize}} = action;
+    const {pageData: {page, pageSize, apiType}} = action;
     //原始数据
-    const crawlerTask = yield call(getCrawlerTask, [page, pageSize]);
-    console.log(crawlerTask);
-    if (crawlerTask.status === 200) {
+    const crawlerData = yield call(getCrawler, page, pageSize, apiType);
+    console.log(crawlerData);
+    if (crawlerData.status === 200) {
         //crawlerTask.data 具体需要用的数据
-        yield put(getCrawlerTaskSuccess(crawlerTask.data));
+        yield put(getCrawlerSuccess(crawlerData.data, apiType));
     }
 }

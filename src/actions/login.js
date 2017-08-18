@@ -6,7 +6,7 @@ export const loginAction = (user) => {
     // console.log(user);
     return {
         type: LOGIN_USER,
-        data: user,
+        user: user,
     }
 };
 

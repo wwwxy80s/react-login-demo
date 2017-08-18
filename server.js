@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require("path");
 const webpack = require('webpack');
-// const jwt = require('express-jwt');
 const proxy = require('http-proxy-middleware');
 const webpackConfig = require('./webpack.config');
 const port = 3000;

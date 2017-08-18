@@ -1,35 +1,39 @@
 export const GET_TASK = 'GET_TASK';
 export const GET_TASK_SUCCESS = 'GET_TASK_SUCCESS';
-export const GET_CRAWLER_TASK = 'GET_CRAWLER_TASK';
-export const GET_CRAWLER_TASK_SUCCESS = 'GET_CRAWLER_TASK_SUCCESS';
-export const GET_CRAWLER_GROUP = 'GET_CRAWLER_TASK';
-export const GET_CRAWLER_GROUP_SUCCESS = 'GET_CRAWLER_TASK_SUCCESS';
+export const GET_CRAWLER = 'GET_CRAWLER_TASK';
+export const GET_CRAWLER_SUCCESS = 'GET_CRAWLER_TASK_SUCCESS';
 export const GET_RULE = 'GET_RULE';
 export const GET_RULE_SUCCESS = 'GET_RULE_SUCCESS';
 
 
-export const getTask = () => ({
+export const getTask = (apiType) => ({
     type: GET_TASK,
+    apiType: apiType,
 });
 
-export const getTaskSuccess = (taskData) => ({
+export const getTaskSuccess = (taskData, apiType) => ({
     type: GET_TASK_SUCCESS,
     taskData: taskData,
+    apiType: apiType,
 });
 
-export const getCrawlerTask = (page, pageSize) => ({
-    type: GET_CRAWLER_TASK,
+export const getCrawler = (page, pageSize, apiType) => ({
+    type: GET_CRAWLER,
     pageData: {
         page: page,
-        pageSize: pageSize
+        pageSize: pageSize,
+        apiType: apiType,
     }
 });
 
-export const getCrawlerTaskSuccess = (crawlerTaskData) => {
-    // console.log(crawlerTaskData);
+export const getCrawlerSuccess = (crawlerData, apiType) => {
+    // console.log(crawlerData);
     return {
-        type: GET_CRAWLER_TASK_SUCCESS,
-        crawlerTaskData: crawlerTaskData,
+        type: GET_CRAWLER_SUCCESS,
+        crawlerData: crawlerData,
+        apiType: apiType,
     }
 };
+
+
 
