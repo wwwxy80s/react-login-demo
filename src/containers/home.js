@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {Row, Col, Card, Table} from 'antd';
 import {connect} from 'react-redux';
 
+import '../css/home.less';
 import {getCrawler, getTask} from "../actions/home";
 
 const {Column} = Table;
@@ -29,24 +30,60 @@ class Home extends Component {
             crawlerTaskData: {pageContent, currentPage, totalCount, pageSize},
         } = this.props;
         return (
-            <div style={{padding: '30px'}}>
-                <Row gutter={16}>
-                    <Col span={6}>
-                        <Card title="任务总数" bordered={true}>{allCount}</Card>
+            <div className="container">
+                <Row type="flex" align="center">
+                    <Col span={5} className="taskCol" offset={0.5}>
+                        <Row type="flex" align="middle" className="countRow">
+                            <Col offset={2}>
+                                <div className="allCountImg countImg">
+                                </div>
+                            </Col>
+                            <Col offset={3}>
+                                <p>任务总数</p>
+                                <p className="countP">{allCount}</p>
+                            </Col>
+                        </Row>
                     </Col>
-                    <Col span={6}>
-                        <Card title="已启用任务" bordered={true}>{enabledCount}</Card>
+                    <Col span={5} className="taskCol" offset={1}>
+                        <Row type="flex" align="middle" className="countRow">
+                            <Col offset={2}>
+                                <div className="enabledCountImg countImg">
+                                </div>
+                            </Col>
+                            <Col offset={3}>
+                                <p>已启用任务</p>
+                                <p className="countP">{enabledCount}</p>
+                            </Col>
+                        </Row>
                     </Col>
-                    <Col span={6}>
-                        <Card title="执行中任务" bordered={true}>{executeCount}</Card>
+                    <Col span={5} className="taskCol" offset={1}>
+                        <Row type="flex" align="middle" className="countRow">
+                            <Col offset={2}>
+                                <div className="executeCountImg countImg">
+                                </div>
+                            </Col>
+                            <Col offset={3}>
+                                <p>执行中任务</p>
+                                <p className="countP">{executeCount}</p>
+                            </Col>
+                        </Row>
                     </Col>
-                    <Col span={6}>
-                        <Card title="休息任务" bordered={true}>{sleepCount}</Card>
+                    <Col span={5} className="taskCol" offset={1}>
+                        <Row type="flex" align="middle" className="countRow">
+                            <Col offset={2}>
+                                <div className="sleepCountImg countImg">
+                                </div>
+                            </Col>
+                            <Col offset={3}>
+                                <p>休息任务</p>
+                                <p className="countP">{sleepCount}</p>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
-                <Row type="flex" gutter={16}>
-                    <Col>
-                        <Table dataSource={pageContent} title={title1}
+                <Row type="flex" className="tableRow">
+                    <Col span={9} offset={2} className="tableCol">
+                        <Table className="countTable" dataSource={pageContent} title={title1}
                                pagination={{
                                    current: currentPage,
                                    total: totalCount,
@@ -73,7 +110,7 @@ class Home extends Component {
                             />
                         </Table>
                     </Col>
-                    <Col>
+                    <Col span={9} offset={2} className="tableCol">
                         <Table dataSource={this.props.crawlerGroupData.pageContent} title={title2}
                                pagination={{
                                    current: this.props.crawlerGroupData.currentPage,
@@ -102,12 +139,29 @@ class Home extends Component {
                         </Table>
                     </Col>
                 </Row>
-
-                <Card title="规则统计" noHovering style={{width: 500}}>
-                    <Card.Grid style={{width: '50%',}}>{this.props.ruleData.allCount}</Card.Grid>
-                    <Card.Grid style={{width: '25%',}}>{this.props.ruleData.forumCount}</Card.Grid>
-                    <Card.Grid style={{width: '25%',}}>{this.props.ruleData.postCount}</Card.Grid>
-                </Card>
+                {/*<Card title="规则统计" noHovering style={{width: 500}}>*/}
+                {/*<Card.Grid style={{width: '50%',}}>{this.props.ruleData.allCount}</Card.Grid>*/}
+                {/*<Card.Grid style={{width: '25%',}}>{this.props.ruleData.forumCount}</Card.Grid>*/}
+                {/*<Card.Grid style={{width: '25%',}}>{this.props.ruleData.postCount}</Card.Grid>*/}
+                {/*</Card>*/}
+                <Row type="flex" align="center" className="ruleRow">
+                    <Col span={4}  offset={1}>
+                        <div className="ruleImg">
+                        </div>
+                    </Col>
+                    <Col span={4} offset={1}>
+                        <p>规则总数</p>
+                        <p className="countP">{this.props.ruleData.allCount}</p>
+                    </Col>
+                    <Col span={4} offset={1}>
+                        <p>板块规则</p>
+                        <p className="countP">{this.props.ruleData.forumCount}</p>
+                    </Col>
+                    <Col span={4} offset={1}>
+                        <p>帖子规则</p>
+                        <p className="countP">{this.props.ruleData.postCount}</p>
+                    </Col>
+                </Row>
             </div>
         );
     }
