@@ -7,32 +7,32 @@ export const GET_RULE_SUCCESS = 'GET_RULE_SUCCESS';
 
 
 export const getTask = (apiType) => ({
-    type: GET_TASK,
-    apiType: apiType,
+  type: GET_TASK,
+  apiType: apiType,
 });
 
 export const getTaskSuccess = (taskData, apiType) => ({
-    type: GET_TASK_SUCCESS,
-    taskData: taskData,
-    apiType: apiType,
+  type: GET_TASK_SUCCESS,
+  taskData: taskData,
+  apiType: apiType,
 });
 
 export const getCrawler = (page, pageSize, apiType) => ({
-    type: GET_CRAWLER,
-    pageData: {
-        page: page,
-        pageSize: pageSize,
-        apiType: apiType,
-    }
+  type: GET_CRAWLER,
+  pageData: {
+    page: page,
+    pageSize: pageSize,
+    apiType: apiType,
+  }
 });
 
 export const getCrawlerSuccess = (crawlerData, apiType) => {
-    // console.log(crawlerData);
-    return {
-        type: GET_CRAWLER_SUCCESS,
-        crawlerData: crawlerData,
-        apiType: apiType,
-    }
+  // console.log(crawlerData);
+  return {
+    type: GET_CRAWLER_SUCCESS,
+    crawlerData: crawlerData,
+    apiType: apiType,
+  }
 };
 
 
